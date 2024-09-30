@@ -62,10 +62,8 @@ class CategoryView extends BaseViewProtocol<CategoryViewModel> {
                                       Visibility(
                                         child: SlidableAction(
                                           onPressed: (context) async {
-                                            /**
-                                            *  consumer
-                                                .deleteProduct(data?[index].id);
-                                            */
+                                            consumer.deleteCategory(
+                                                data?[index].id);
                                           },
                                           backgroundColor: Colors.red,
                                           foregroundColor: Colors.white,

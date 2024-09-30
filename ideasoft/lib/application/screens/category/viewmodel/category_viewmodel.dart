@@ -3,6 +3,7 @@ import 'package:ideasoft/application/data_provider/data_provider_core/freezed/sw
 import 'package:ideasoft/application/data_provider/data_provider_core/layers/network_executer.dart';
 import 'package:ideasoft/application/data_provider/model/response/category/category.dart';
 import 'package:ideasoft/application/data_provider/requests/category/category_request.dart';
+import 'package:ideasoft/application/data_provider/requests/delete_category/delete_category_request.dart';
 import 'package:ideasoft/core/freezed/result_state.dart';
 
 import '../../../../core/base/base_viewmodel.dart';
@@ -34,5 +35,17 @@ class CategoryViewModel extends BaseViewModel<CategoryRouter> {
 
   void showNewCategory() {
     router.showNewCategory();
+  }
+
+  Future<void> deleteCategory(int? id) async {
+    var result = await NetworkExecuter.shared.executeResponse(
+      route: DeleteCategoryRequest(id: id),
+    );
+    result.when(
+        success: (data) {
+          getCategoryList();
+        },
+        failure: (error) {});
+    notifty();
   }
 }
