@@ -31,4 +31,8 @@ class CategoryViewModel extends BaseViewModel<CategoryRouter> {
       notifty();
     });
   }
+
+  void showNewCategory() {
+    router.showNewCategory();
+  }
 }

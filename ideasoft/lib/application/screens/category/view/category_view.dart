@@ -24,8 +24,13 @@ class CategoryView extends BaseViewProtocol<CategoryViewModel> {
   Widget startView(BuildContext context, ThemeManager theme) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("CategoryPage"),
+        title: const Text("Kategoriler"),
       ),
+      floatingActionButton: ElevatedButton(
+          onPressed: () {
+            viewModel.showNewCategory();
+          },
+          child: const Text("Kategori Ekle")),
       body: ChangeNotifierProvider(
         create: (_) => viewModel,
         builder: (context, child) {
