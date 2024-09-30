@@ -48,4 +48,8 @@ class CategoryViewModel extends BaseViewModel<CategoryRouter> {
         failure: (error) {});
     notifty();
   }
+
+  void editCategory({int? id, String? name, int? status}) {
+    router.showEditCategory(id: id, name: name, status: status);
+  }
 }

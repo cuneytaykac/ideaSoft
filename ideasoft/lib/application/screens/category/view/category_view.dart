@@ -83,6 +83,16 @@ class CategoryView extends BaseViewProtocol<CategoryViewModel> {
                                           ],
                                         ),
                                       ),
+                                      trailing: IconButton(
+                                        onPressed: () {
+                                          consumer.editCategory(
+                                              id: data?[index].id,
+                                              name: data?[index].name,
+                                              status: int.parse(
+                                                  '${data?[index].status}'));
+                                        },
+                                        icon: const Icon(Icons.edit),
+                                      ),
                                     ),
                                   ),
                                 );

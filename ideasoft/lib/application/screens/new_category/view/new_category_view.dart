@@ -10,7 +10,9 @@ class NewCategoryView extends BaseViewProtocol<NewCategoryViewModel> {
       : super(viewModel, key: key);
 
   @override
-  void dispose() {}
+  void dispose() {
+    viewModel.disposeVM();
+  }
 
   @override
   void init() {}
@@ -19,13 +21,14 @@ class NewCategoryView extends BaseViewProtocol<NewCategoryViewModel> {
   Widget startView(BuildContext context, ThemeManager theme) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kategori Ekle"),
+        title:
+            Text(viewModel.id == null ? "Kategori Ekle" : "Kategori Güncelle"),
       ),
       floatingActionButton: ElevatedButton(
           onPressed: () {
             viewModel.saveButton();
           },
-          child: const Text("Ekle")),
+          child: Text(viewModel.id == null ? "Ekle" : "Güncelle")),
       body: ChangeNotifierProvider(
         create: (_) => viewModel,
         builder: (context, child) {
