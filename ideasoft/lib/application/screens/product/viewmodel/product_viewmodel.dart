@@ -18,7 +18,7 @@ class ProductViewModel extends BaseViewModel<ProductRouter> {
 
   TextEditingController searchController = TextEditingController();
 
-  ResultState<List<Product>?, SwError> resultState = const ResultState.idle();
+  ResultState<List<Product>?, SwError> resultState = const Idle();
 
   Future<void> getProductList() async {
     resultState = const Pending();

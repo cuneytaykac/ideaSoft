@@ -33,7 +33,12 @@ class HomeView extends BaseViewProtocol<HomeViewModel> {
                       consumer.showProduct();
                     },
                     child: const Card(child: Center(child: Text("Ürünler")))),
-                const Card(child: Center(child: Text("Kategoriler"))),
+                InkWell(
+                    onTap: () {
+                      consumer.showCategory();
+                    },
+                    child:
+                        const Card(child: Center(child: Text("Kategoriler")))),
               ],
             );
           });

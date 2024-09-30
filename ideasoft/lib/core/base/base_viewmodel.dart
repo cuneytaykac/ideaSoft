@@ -13,18 +13,13 @@ class BaseViewModel<T extends AppRouter> extends BaseViewModelProtocol {
   BaseViewModel(this.router);
 
   @override
-  void hideLoading() {
-    
-  }
+  void hideLoading() {}
 
   @override
-  void showLoading() {
-    
-  }
+  void showLoading() {}
 
   @override
   void notifty() {
     notifyListeners();
   }
 }
-

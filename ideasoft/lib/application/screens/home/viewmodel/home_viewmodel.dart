@@ -9,4 +9,8 @@ class HomeViewModel extends BaseViewModel<HomeRouter> {
   void showProduct() {
     router.showProduct();
   }
+
+  void showCategory() {
+    router.showCategory();
+  }
 }
