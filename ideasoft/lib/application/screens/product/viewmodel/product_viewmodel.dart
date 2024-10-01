@@ -53,4 +53,8 @@ class ProductViewModel extends BaseViewModel<ProductRouter> {
   void addProduct() {
     router.showNewProduct();
   }
+
+  void showCategory() {
+    router.showCategory();
+  }
 }

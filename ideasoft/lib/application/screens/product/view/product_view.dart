@@ -29,6 +29,13 @@ class ProductView extends BaseViewProtocol<ProductViewModel> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Ürünler"),
+        actions: [
+          TextButton(
+              onPressed: () {
+                viewModel.showCategory();
+              },
+              child: const Text("Kategoriler"))
+        ],
       ),
       floatingActionButton: ElevatedButton(
           onPressed: () {

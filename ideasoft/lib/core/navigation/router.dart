@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ideasoft/application/screens/home/route/home_router.dart';
-import 'package:ideasoft/application/screens/home/view/home_view.dart';
-import 'package:ideasoft/application/screens/home/viewmodel/home_viewmodel.dart';
+import 'package:ideasoft/application/screens/product/route/product_router.dart';
+import 'package:ideasoft/application/screens/product/view/product_view.dart';
+import 'package:ideasoft/application/screens/product/viewmodel/product_viewmodel.dart';
 
 import 'navigation.dart';
 
@@ -31,9 +31,9 @@ class AppRouter extends RouterProtocol {
 
 class MainRouter extends AppRouter {
   static Widget startApp() {
-    final router = HomeRouter();
-    final viewModel = HomeViewModel(router);
-    final view = HomeView(viewModel: viewModel);
+    final router = ProductRouter();
+    final viewModel = ProductViewModel(router);
+    final view = ProductView(viewModel: viewModel);
     return view;
   }
 }
