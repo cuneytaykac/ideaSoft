@@ -82,8 +82,8 @@ class ProductView extends BaseViewProtocol<ProductViewModel> {
                           child: Card(
                             elevation: 3,
                             color: data?[index].isSelected == false
-                                ? Colors.blue
-                                : Colors.red,
+                                ? null
+                                : Colors.blueGrey,
                             shape: RoundedRectangleBorder(
                               side: const BorderSide(
                                   color: Colors.white70, width: 2),
