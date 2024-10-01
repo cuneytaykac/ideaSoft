@@ -12,6 +12,7 @@ class Category extends BaseNetworkModel<Category> {
   num? status;
   String? imageUrl;
   DateTime? createdAt;
+  bool? isSelected;
   Category(
       {this.createdAt,
       this.id,
@@ -19,7 +20,8 @@ class Category extends BaseNetworkModel<Category> {
       this.name,
       this.slug,
       this.sortOrder,
-      this.status});
+      this.status,
+      this.isSelected = false});
 
   factory Category.fromJson(Map<String, dynamic> json) =>
       _$CategoryFromJson(json);

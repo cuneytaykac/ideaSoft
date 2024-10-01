@@ -21,7 +21,9 @@ class ProductView extends BaseViewProtocol<ProductViewModel> {
 
   @override
   void init() {
-    viewModel.getProductList();
+    viewModel
+      ..getCategoryList()
+      ..getProductList();
   }
 
   @override
@@ -59,9 +61,41 @@ class ProductView extends BaseViewProtocol<ProductViewModel> {
       child: Column(
         children: [
           Expanded(
+            flex: 2,
             child: _searchbar(consumer),
           ),
-          Expanded(flex: 8, child: _product(consumer)),
+          Expanded(
+            flex: 2,
+            child: ResultStateBuilder(
+                resultState: consumer.categoryResultState,
+                completed: (data) => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: data?.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          consumer.selectCategory(data![index]);
+                        },
+                        child: SizedBox(
+                          width: context.screenWidht(.3),
+                          child: Card(
+                            elevation: 3,
+                            color: data?[index].isSelected == false
+                                ? Colors.blue
+                                : Colors.red,
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  color: Colors.white70, width: 2),
+                              borderRadius: BorderRadius.circular(90),
+                            ),
+                            child: Center(child: Text('${data?[index].name}')),
+                          ),
+                        ),
+                      );
+                    })),
+          ),
+          Expanded(flex: 12, child: _product(consumer)),
         ],
       ),
     );

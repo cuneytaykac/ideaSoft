@@ -13,9 +13,22 @@ class ProductsRequest extends BaseClient {
   @override
   Map<String, dynamic>? params;
 
-  ProductsRequest({
-    String? s,
-  });
+  ProductsRequest({String? s, int? categoryId}) {
+    if (s != null && categoryId != null) {
+      params = {
+        's': s,
+        'categoryIds': categoryId,
+      };
+    } else if (s == null && categoryId != null) {
+      params = {
+        'categoryIds': categoryId,
+      };
+    } else if (s != null && categoryId == null) {
+      params = {
+        's': s,
+      };
+    } else {}
+  }
 
   @override
   bool get isFormDataBody => false;

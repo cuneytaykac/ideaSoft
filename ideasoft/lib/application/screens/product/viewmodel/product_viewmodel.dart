@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ideasoft/application/data_provider/data_provider_core/freezed/sw_error.dart';
 import 'package:ideasoft/application/data_provider/data_provider_core/layers/network_executer.dart';
+import 'package:ideasoft/application/data_provider/model/response/category/category.dart';
 import 'package:ideasoft/application/data_provider/model/response/product/product.dart';
+import 'package:ideasoft/application/data_provider/requests/category/category_request.dart';
 import 'package:ideasoft/application/data_provider/requests/delete_product/delete_product_request.dart';
 import 'package:ideasoft/application/data_provider/requests/products/products_request.dart';
 import 'package:ideasoft/core/freezed/result_state.dart';
@@ -23,7 +25,8 @@ class ProductViewModel extends BaseViewModel<ProductRouter> {
   Future<void> getProductList() async {
     resultState = const Pending();
     var result = await NetworkExecuter.shared.execute<Product, List<Product>>(
-        route: ProductsRequest(s: searchController.text),
+        route:
+            ProductsRequest(s: searchController.text, categoryId: categoryId),
         responseType: Product());
     result.when(success: (data) {
       if (data.isEmpty ?? true) {
@@ -56,5 +59,41 @@ class ProductViewModel extends BaseViewModel<ProductRouter> {
 
   void showCategory() {
     router.showCategory();
+  }
+
+  ResultState<List<Category>?, SwError> categoryResultState = const Idle();
+  int? categoryId;
+  Future<void> getCategoryList() async {
+    categoryResultState = const Pending();
+    var result = await NetworkExecuter.shared.execute<Category, List<Category>>(
+        route: CategoryRequest(s: ""), responseType: Category());
+    result.when(success: (data) {
+      if (data.isEmpty ?? true) {
+        categoryResultState = const Empty();
+      } else {
+        categoryResultState = Completed(data);
+      }
+      notifty();
+    }, failure: (error) {
+      categoryResultState =
+          Failed(SwError(errorMessage: error.localizedErrorMessage));
+      notifty();
+    });
+  }
+
+  void selectCategory(Category category) {
+    category.isSelected == false
+        ? category.isSelected = true
+        : category.isSelected = false;
+    notifty();
+    if (category.isSelected == true) {
+      categoryId = category.id;
+      notifty();
+    } else {
+      categoryId = null;
+      notifty();
+    }
+    getProductList();
+    notifty();
   }
 }
