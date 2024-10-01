@@ -23,6 +23,7 @@ class ProductViewModel extends BaseViewModel<ProductRouter> {
   ResultState<List<Product>?, SwError> resultState = const Idle();
 
   Future<void> getProductList() async {
+    await getCategoryList();
     resultState = const Pending();
     var result = await NetworkExecuter.shared.execute<Product, List<Product>>(
         route:

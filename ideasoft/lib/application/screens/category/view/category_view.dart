@@ -25,14 +25,8 @@ class CategoryView extends BaseViewProtocol<CategoryViewModel> {
   @override
   Widget startView(BuildContext context, ThemeManager theme) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Kategoriler"),
-      ),
-      floatingActionButton: ElevatedButton(
-          onPressed: () {
-            viewModel.showNewCategory();
-          },
-          child: const Text("Kategori Ekle")),
+      appBar: _appbar(),
+      floatingActionButton: _fab(),
       body: ChangeNotifierProvider(
         create: (_) => viewModel,
         builder: (context, child) {
@@ -51,6 +45,20 @@ class CategoryView extends BaseViewProtocol<CategoryViewModel> {
           });
         },
       ),
+    );
+  }
+
+  ElevatedButton _fab() {
+    return ElevatedButton(
+        onPressed: () {
+          viewModel.showNewCategory();
+        },
+        child: const Text("Kategori Ekle"));
+  }
+
+  AppBar _appbar() {
+    return AppBar(
+      title: const Text("Kategoriler"),
     );
   }
 
